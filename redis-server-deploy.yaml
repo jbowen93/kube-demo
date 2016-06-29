@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: redis-server
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: redis-server
+        spec:
+            nodeSelector:
+                availabilityZone: us-west-2a
+            containers:
+            - name: redis
+              image: redis
+              volumeMounts:
+              - name: redis-persistent-storage
+                mountPath: /data/redis
+              ports:
+              - containerPort: 6379
+                name: "redis-server"
+            volumes:
+            - name: redis-persistent-storage
+              persistentVolumeClaim:
+                claimName: redis-claim

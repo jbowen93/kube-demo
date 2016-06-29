@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: redis-client
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: redis-client
+        spec:
+            containers:
+            - name: redis-client
+              image: jbowen/go-redis-test:v0.0.6

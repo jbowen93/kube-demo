@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: alpine-shell
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: alpine-shell
+        spec:
+            containers:
+            - name: alpine
+              image: thirtyx/alpine-curl:v0
+              command: ["/bin/sleep", "10000"]
